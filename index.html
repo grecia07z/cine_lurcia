@@ -3,14 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cartelera</title>
+    <title>Cine Lurcia - Cartelera</title>
     <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-
+    <div class="mensajes" style="display:none;"></div>
     
-    <script src="modulos.js"></script>
-    <script src="eventos.js"></script>
-    <script src="mostrarMensaje.js"></script>
+    <h1>Cine Lurcia</h1>
+
+    <div class="acciones">
+        <button id="btn-agregar">Agregar Película</button>
+        <form id="form-buscar">
+            <input type="text" name="nombreBuscar" placeholder="Buscar por título...">
+            <input type="text" name="codigoBuscar" placeholder="Buscar por código...">
+            <button type="submit">Buscar</button>
+            <button id="btn-filtros" type="button">Limpiar</button>
+        </form>
+    </div>
+    <form id="form-agregar" style="display: none;">
+        <div class="cerrar">
+            <button id="btn-cerrar-formAgregar">X</button>
+        </div>
+        <h3>Nueva Película</h3>
+        <input type="text" name="titulo" placeholder="Título Original" required>
+        <input type="text" name="genero" placeholder="Género" required>
+        <input type="text" name="codigo" placeholder="Código Único" required>
+        <input type="file" id="imagen" accept="image/*" style="margin: 10px 0; color: #fff; display: block;">
+        <button type="submit">Guardar en Cartelera</button>
+    </form>
+    <form id="form-modificar" style="display: none;"></form>
+    <hr>
+    <h2>Cartelera Actual</h2>
+    <div id="listadoPeliculas"></div>
+
+    <script src="js/modulos.js"></script>
+    <script src="js/eventos.js"></script>
+    <script src="js/mostrarMensaje.js"></script>
 </body>
 </html>

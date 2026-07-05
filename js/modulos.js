@@ -2,35 +2,41 @@ const agregarPelicula = (nuevaPelicula) => {
     let peliculas = JSON.parse(localStorage.getItem("peliculas"))||[];
     peliculas.push(nuevaPelicula);
     localStorage.setItem("peliculas", JSON.stringify(peliculas));
-    mostrarMensaje("nueva pelicula agregada");
+    mostrarMensaje("¡Nueva pelicula agregada!");
     mostrarPeliculas();
 
 }
 
 const mostrarPeliculas = (peliculasEncontradas) => {
-    let contenedorPeliculas = document.querySelector ('#listadoPeliculas');
-    contenedorPeliculas.innerHTML = '';
-    let peliculas = peliculasEncontradas|| JSON.parse(localStorage.getItem('peliculas'))||[];
+    let contenedorPeliculas = document.querySelector('#listadoPeliculas');
+    
+    if (!contenedorPeliculas) return; 
 
-    if (peliculas.length<0){
+    contenedorPeliculas.innerHTML = '';
+
+    let peliculas = peliculasEncontradas || JSON.parse(localStorage.getItem('peliculas')) || [];
+
+    if (peliculas.length > 0) {
+   
         peliculas.forEach(p => {
-            contenedorPeliculas.innerHTML +=`
-            <div class="pelicula">
-            <div class="info">
-            <p><strong>Título:</strong> ${p.titulo}</p>
-            <p><strong>Género:</strong> ${p.genero}</p>
-            <p><strong>Código:</strong> ${p.codigo}</p>
-            </div>
-            <div class="btn-modificar" onclick = "mostrarFormModificar ('${p.titulo}', '${p.genero}', '${p.codigo}')">Modificar</button>
-            <button class="btn-eliminar" onclick = "eliminarPeliculas ('${p.codigo}')">Eliminar</button>
-            </div>
-            </div>
-            
+                 let fotoPoster= p.imagen|| 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=200'
+            contenedorPeliculas.innerHTML += `
+                <div class="pelicula">
+                <img src="${fotoPoster}" alt="Poster" class="poster-pelicula">
+                    <div class="info">
+                        <p><strong>Título:</strong> ${p.titulo}</p>
+                        <p><strong>Género:</strong> ${p.genero}</p>
+                        <p><strong>Código:</strong> ${p.codigo}</p>
+                    </div>
+                    <div class="botones">
+                        <button class="btn-modificar" onclick="mostrarFormModificar('${p.titulo}', '${p.genero}', '${p.codigo}')">Modificar</button>
+                        <button class="btn-eliminar" onclick="eliminarPelicula('${p.codigo}')">Eliminar</button>
+                    </div>
+                </div>
             `;
-        })
-    }
-    else {
-        contenedorPeliculas.innerHTML = '<p>no hay peliculas para mostrar.</p>'
+        });
+    } else {
+        contenedorPeliculas.innerHTML = '<p>No hay películas para mostrar.</p>';
     }
 }
 
@@ -43,7 +49,46 @@ const buscarPelicula = (peliculaABuscar) => {
 }
 
 const eliminarPelicula = (codigo) => {
-    if (confirm ("¿desea eliminar esta pelicula de la cartelera?")){
-        let peliculas = JSON.parse(localStorage)
+    if (confirm ("¿Desea eliminar esta pelicula de la cartelera?")){
+        let peliculas = JSON.parse(localStorage.getItem("peliculas"))||[];
+        let indice=peliculas.findIndex(p=>p.codigo==codigo);
+
+        peliculas.splice(indice, 1);
+        localStorage.setItem("peliculas", JSON.stringify(peliculas));
+        mostrarPeliculas()
+        mostrarMensaje("Pelicula eliminada")
     }
+}
+const mostrarFormModificar = (tituloActual, generoActual, codigo) => {
+    document.querySelector('#form-modificar').innerHTML = `
+        <div class="cerrar">
+            <button type="button" class="btn-cerrar-formModif" onclick="document.querySelector('#form-modificar').style.display='none'">X</button>
+        </div>
+        <h3>Modificar Película</h3>
+        <p>Editando código: <strong>#${codigo}</strong></p>
+        
+        <input type="hidden" name="codigo" value="${codigo}">
+        
+        <label>Nuevo Título</label>
+        <input type="text" name="titulo" value="${tituloActual}" required>
+        
+        <label>Nuevo Género</label>
+        <input type="text" name="genero" value="${generoActual}" required>
+        
+        <input type="submit" name="submit" value="Guardar Cambios">
+    `;
+    
+    document.querySelector('#form-modificar').style.display = 'block';
+}
+const modificarPelicula=(nuevosDatos)=>{  
+    let peliculas= JSON.parse(localStorage.getItem('peliculas'))||[];
+    let peliculasAModif= peliculas.find(p=>p.codigo==nuevosDatos.codigoAModif);
+    
+    if(peliculasAModif){
+        peliculasAModif.titulo=nuevosDatos.nombreAModif;
+        peliculasAModif.genero=nuevosDatos.generoAModif;
+    }
+    localStorage.setItem("peliculas", JSON.stringify(peliculas));
+    mostrarPeliculas();
+    mostrarMensaje("Pelicula actualizada")
 }
