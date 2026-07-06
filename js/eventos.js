@@ -17,10 +17,12 @@ form_agregar.addEventListener("submit", (e) => {
 
 
     const mandarALocalStorage = (imagenBase64) => {
+        const peliculasActuales= JSON.parse(localStorage.getItem('peliculas'))||[]
+        const proximoCodigo= peliculasActuales.length+1;
         const nuevaPelicula = {
-            titulo: form_agregar.titulo.value,
-            genero: form_agregar.genero.value,
-            codigo: form_agregar.codigo.value,
+            titulo: form_agregar.querySelector('[name="titulo"]').value,
+            genero: form_agregar.querySelector('[name="genero"]').value,
+            codigo: peliculasActuales.length+1,
             imagen: imagenBase64
         };
 

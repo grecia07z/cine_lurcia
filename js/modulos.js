@@ -84,7 +84,7 @@ const mostrarFormModificar = (tituloActual, generoActual, codigo) => {
 }
 const modificarPelicula=(nuevosDatos)=>{  
     let peliculas= JSON.parse(localStorage.getItem('peliculas'))||[];
-    let peliculasAModif= peliculas.find(p=>p.codigo==nuevosDatos.codigoAModif);
+    let peliculasAModif= peliculas.find(p=>String(p.codigo)===String(nuevosDatos.codigoAModif));
     
     if(peliculasAModif){
         peliculasAModif.titulo=nuevosDatos.nombreAModif;
