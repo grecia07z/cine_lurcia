@@ -42,7 +42,9 @@ const mostrarPeliculas = (peliculasEncontradas) => {
 
 const buscarPelicula = (peliculaABuscar) => {
     let peliculas = JSON.parse(localStorage.getItem('peliculas'))||[];
-    let peliculasEncontradas = peliculas.filter(p => p.titulo.toLowerCase().includes(peliculaABuscar.nombreABuscar.toLowerCase())||p.codigo == peliculaABuscar.codigoABuscar);
+    let peliculasEncontradas = peliculas.filter(p => 
+        p.titulo.toLowerCase().includes(peliculaABuscar.nombreABuscar.toLowerCase())||
+        p.genero.toLowerCase().includes(peliculaABuscar.generoABuscar.toLowerCase()));
     console.log(peliculasEncontradas);
     mostrarPeliculas(peliculasEncontradas);
 
@@ -87,8 +89,9 @@ const modificarPelicula=(nuevosDatos)=>{
     if(peliculasAModif){
         peliculasAModif.titulo=nuevosDatos.nombreAModif;
         peliculasAModif.genero=nuevosDatos.generoAModif;
-    }
+    
     localStorage.setItem("peliculas", JSON.stringify(peliculas));
-    mostrarPeliculas();
+    mostrarPeliculas(peliculas);
     mostrarMensaje("Pelicula actualizada")
+}
 }

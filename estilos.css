@@ -105,7 +105,7 @@ button:active, input[type="submit"]:active{
    border-top: 5px solid #ff1252;
    border-radius: 12px;
    padding: 20px;
-   margin: 0 auto 20px auto;
+   margin: 0;
    max-width: 320px;
 }
 .poster-pelicula{
@@ -135,17 +135,18 @@ button:active, input[type="submit"]:active{
     margin-left: 0;
 }
 .btn-modificar{
-    background-color: #222;
-    color: #ffb74d;
-    border: 1px solid #ffb74d;
+    background-color: #ff1252;
+    color: white;
+    border: 1px solid #ff1252;
 }
 .btn-modificar:hover{
-    background-color: #ffa726;
-    color: #111;
+    background-color: #b91319;
+    color: white;
 }
 .btn-eliminar{
-    background-color: #ffa726;
+    background-color: #ff1252;
     color: white;
+    border: 1px solid #ff1252;
 }
 .btn-eliminar:hover{
     background-color: #b91319;
@@ -237,4 +238,11 @@ h2{
 #form-modificar{
     margin: 30px auto !important;
     float: none;
+}
+#listadoPeliculas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
 }

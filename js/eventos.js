@@ -45,7 +45,7 @@ form_agregar.addEventListener("submit", (e) => {
 
         const peliculaABuscar={
             nombreABuscar: form_buscar.nombreBuscar.value,
-            codigoABuscar: form_buscar.codigoBuscar.value
+            generoABuscar: form_buscar.generoBuscar.value
         }
         buscarPelicula(peliculaABuscar);
     });
@@ -55,16 +55,16 @@ form_agregar.addEventListener("submit", (e) => {
         form_buscar.reset();
         mostrarPeliculas();
     });
-    const form_modficar=document.querySelector("#form-modificar");
-    form_modficar.addEventListener("submit", (e)=>{
+    const form_modificar=document.querySelector("#form-modificar");
+    form_modificar.addEventListener("submit", (e)=>{
         e.preventDefault();
 
         const nuevosDatos={
-            nombreAModif: form_modficar.titulo.value,
-            generoAModif: form_modficar.genero.value,
-            codigoAModif: form_modficar.codigo.value
+            nombreAModif: form_modificar.querySelector('input[name="titulo"]').value,
+            generoAModif: form_modificar.querySelector('input[name="genero"]').value,
+            codigoAModif: form_modificar.querySelector('input[name="codigo"]').value
         }
         modificarPelicula(nuevosDatos);
-        form_modficar.style.display="none";
+        form_modificar.style.display="none";
     })
 })
