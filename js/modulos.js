@@ -41,21 +41,18 @@ const mostrarPeliculas = (peliculasEncontradas) => {
 }
 
 const buscarPelicula = (datosBusqueda) => {
-    let peliculas = JSON.parse(localStorage.getItem('peliculas'))||[];
+    let peliculas = JSON.parse(localStorage.getItem('peliculas')) || [];
     let peliculasEncontradas = peliculas.filter(p => {
-        const coincideTitulo= datosBusqueda.nombreABuscar ?
-         p.titulo.toLowerCase().includes(datosBusqueda.nombreABuscar.toLowerCase()): true;
+        const coincideTitulo = datosBusqueda.nombreABuscar ?
+         p.titulo.toLowerCase().includes(datosBusqueda.nombreABuscar.toLowerCase()) : true;
 
-        const coincideGenero= datosBusqueda.generoABuscar ?
-         p.genero===datosBusqueda.generoABuscar: true;
+        const coincideGenero = datosBusqueda.generoABuscar ?
+         p.genero.toLowerCase() === datosBusqueda.generoABuscar.toLowerCase() : true;
 
-         return coincideTitulo && coincideGenero;
-       // p.titulo.toLowerCase().includes(peliculaABuscar.nombreABuscar.toLowerCase())||
-       // p.genero.toLowerCase().includes(peliculaABuscar.generoABuscar.toLowerCase()));
-    //console.log(peliculasEncontradas);
+        return coincideTitulo && coincideGenero;
+    }); 
     mostrarPeliculas(peliculasEncontradas);
-
-})}
+}
 
 const eliminarPelicula = (codigo) => {
     if (confirm ("¿Desea eliminar esta pelicula de la cartelera?")){
@@ -82,7 +79,14 @@ const mostrarFormModificar = (tituloActual, generoActual, codigo) => {
         <input type="text" name="titulo" value="${tituloActual}" required>
         
         <label>Nuevo Género</label>
-        <input type="text" name="genero" value="${generoActual}" required>
+        <select name="genero" required>
+            <option value="Comedia" ${generoActual.toLowerCase() === 'comedia' ? 'selected' : ''}>Comedia</option>
+            <option value="Terror" ${generoActual.toLowerCase() === 'terror' ? 'selected' : ''}>Terror</option>
+            <option value="Ciencia Ficción" ${generoActual.toLowerCase() === 'ciencia ficción' ? 'selected' : ''}>Ciencia Ficción</option>
+            <option value="Aventura" ${generoActual.toLowerCase() === 'aventura' ? 'selected' : ''}>Aventura</option>
+            <option value="Romance" ${generoActual.toLowerCase() === 'romance' ? 'selected' : ''}>Romance</option>
+            <option value="Infantil" ${generoActual.toLowerCase() === 'infantil' ? 'selected' : ''}>Infantil</option>
+        </select>
         
         <input type="submit" name="submit" value="Guardar Cambios">
     `;
