@@ -15,7 +15,15 @@
         <button id="btn-agregar">Agregar Película</button>
         <form id="form-buscar">
             <input type="text" name="nombreBuscar" placeholder="Buscar por título...">
-            <input type="text" name="generoBuscar" placeholder="Buscar por género...">
+            <select name="generoBuscar">
+                <option value="">Todos los géneros</option>
+                <option value="Comedia">Comedia</option>
+                <option value="Terror">Terror</option>
+                <option value="Ciencia Ficción">Ciencia Ficción</option>
+                <option value="Aventura">Aventura</option>
+                <option value="Romance">Romance</option>
+                <option value="Infantil">Infantil</option>
+            </select>
             <button type="submit">Buscar</button>
             <button id="btn-filtros" type="button">Limpiar</button>
         </form>
@@ -32,6 +40,8 @@
             <option value="Terror">Terror</option>
             <option value="Ciencia Ficcion">Ciencia Ficción</option>
             <option value="Aventura">Aventura</option>
+            <option value="Romance">Romance</option>
+            <option value="Infantil">Infantil</option>
         </select>
         <!-- <input type="text" name="codigo" placeholder="Código Único" required> -->
         <input type="file" id="imagen" accept="image/*" style="margin: 10px 0; color: #fff; display: block;">

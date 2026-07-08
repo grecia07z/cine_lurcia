@@ -46,8 +46,8 @@ form_agregar.addEventListener("submit", (e) => {
         e.preventDefault();
 
         const peliculaABuscar={
-            nombreABuscar: form_buscar.nombreBuscar.value,
-            generoABuscar: form_buscar.generoBuscar.value
+            nombreABuscar: form_buscar.querySelector('[name="nombreBuscar"]').value.trim(),
+            generoABuscar: form_buscar.querySelector('[name="generoBuscar"]').value
         }
         buscarPelicula(peliculaABuscar);
     });
@@ -63,7 +63,7 @@ form_agregar.addEventListener("submit", (e) => {
 
         const nuevosDatos={
             nombreAModif: form_modificar.querySelector('input[name="titulo"]').value,
-            generoAModif: form_modificar.querySelector('input[name="genero"]').value,
+            generoAModif: form_modificar.querySelector('select[name="genero"]').value,
             codigoAModif: form_modificar.querySelector('input[name="codigo"]').value
         }
         modificarPelicula(nuevosDatos);

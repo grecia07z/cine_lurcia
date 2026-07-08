@@ -40,15 +40,22 @@ const mostrarPeliculas = (peliculasEncontradas) => {
     }
 }
 
-const buscarPelicula = (peliculaABuscar) => {
+const buscarPelicula = (datosBusqueda) => {
     let peliculas = JSON.parse(localStorage.getItem('peliculas'))||[];
-    let peliculasEncontradas = peliculas.filter(p => 
-        p.titulo.toLowerCase().includes(peliculaABuscar.nombreABuscar.toLowerCase())||
-        p.genero.toLowerCase().includes(peliculaABuscar.generoABuscar.toLowerCase()));
-    console.log(peliculasEncontradas);
+    let peliculasEncontradas = peliculas.filter(p => {
+        const coincideTitulo= datosBusqueda.nombreABuscar ?
+         p.titulo.toLowerCase().includes(datosBusqueda.nombreABuscar.toLowerCase()): true;
+
+        const coincideGenero= datosBusqueda.generoABuscar ?
+         p.genero===datosBusqueda.generoABuscar: true;
+
+         return coincideTitulo && coincideGenero;
+       // p.titulo.toLowerCase().includes(peliculaABuscar.nombreABuscar.toLowerCase())||
+       // p.genero.toLowerCase().includes(peliculaABuscar.generoABuscar.toLowerCase()));
+    //console.log(peliculasEncontradas);
     mostrarPeliculas(peliculasEncontradas);
 
-}
+})}
 
 const eliminarPelicula = (codigo) => {
     if (confirm ("¿Desea eliminar esta pelicula de la cartelera?")){
